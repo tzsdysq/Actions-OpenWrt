@@ -3,4 +3,4 @@ src-git luci https://git.openwrt.org/project/luci.git
 src-git routing https://git.openwrt.org/feed/routing.git
 src-git telephony https://git.openwrt.org/feed/telephony.git
 src-git video https://github.com/openwrt/video.git
-src-git ddnsgo https://github.com/sirpdboy/luci-app-ddns-go
+src-git taskplan  https://github.com/sirpdboy/luci-app-ddns-go
