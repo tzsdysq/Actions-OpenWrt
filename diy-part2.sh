@@ -19,3 +19,10 @@ git clone https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
+
+#dnsproxy
+git clone --depth 1 --branch master --single-branch --no-checkout https://github.com/muink/luci-app-dnsproxy.git package/luci-app-dnsproxy
+pushd package/luci-app-dnsproxy
+umask 022
+git checkout
+popd
