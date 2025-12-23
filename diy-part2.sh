@@ -17,6 +17,9 @@
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 git clone https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
+#oaf
+git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
 
