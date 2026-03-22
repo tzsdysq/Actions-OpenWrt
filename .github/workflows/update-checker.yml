@@ -39,35 +39,3 @@ jobs:
         with:
           token: ${{ github.token }}
           event-type: Source Code Update
-
-      - name: Delete old workflow runs
-        if: always()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -e
-
-          WORKFLOW_NAME="${{ github.workflow }}"
-          KEEP=2
-
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            "/repos/${{ github.repository }}/actions/runs?per_page=100" \
-          | jq -r --arg wf "$WORKFLOW_NAME" '
-              .workflow_runs
-              | map(select(.name == $wf))
-              | sort_by(.created_at)
-              | reverse
-              | .['"$KEEP"':]
-              | .[]
-              | select(.status == "completed")
-              | .id
-            ' \
-          | while read -r run_id; do
-              [ -n "$run_id" ] || continue
-              echo "Deleting run: $run_id"
-              gh api \
-                --method DELETE \
-                -H "Accept: application/vnd.github+json" \
-                "/repos/${{ github.repository }}/actions/runs/$run_id" || true
-            done
