@@ -30,7 +30,6 @@ umask 022
 git checkout
 popd
 
-cd package
+#bandix
 git clone https://github.com/timsaya/luci-app-bandix.git
 git clone https://github.com/timsaya/openwrt-bandix.git
-cd ..
