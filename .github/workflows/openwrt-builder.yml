@@ -93,7 +93,6 @@ jobs:
 
       - name: Load custom config
         run: |
-          cp .config openwrt/.config
           cd openwrt
           make defconfig
           grep 'CONFIG_TESTING_KERNEL=y' .config
