@@ -91,14 +91,13 @@ jobs:
           cd openwrt
           "$GITHUB_WORKSPACE/$DIY_P2_SH"
 
-      - name: Enable testing kernel
+      - name: Load custom config
         run: |
+          cp .config openwrt/.config
           cd openwrt
-          sed -i '/^CONFIG_TESTING_KERNEL=/d' .config
-          sed -i '/^# CONFIG_TESTING_KERNEL is not set$/d' .config
-          echo 'CONFIG_TESTING_KERNEL=y' >> .config
           make defconfig
-          grep -E 'CONFIG_TESTING_KERNEL|CONFIG_LINUX_' .config || true
+          grep 'CONFIG_TESTING_KERNEL=y' .config
+          grep 'CONFIG_LINUX_' .config || true
 
       - name: Download package
         run: |
