@@ -95,8 +95,9 @@ jobs:
         run: |
           cd openwrt
           make defconfig
-          grep 'CONFIG_TESTING_KERNEL=y' .config
-          grep 'CONFIG_LINUX_' .config || true
+          echo "===== kernel config check ====="
+          grep '^CONFIG_TESTING_KERNEL=y' .config
+          grep '^CONFIG_LINUX_' .config || true
 
       - name: Download package
         run: |
