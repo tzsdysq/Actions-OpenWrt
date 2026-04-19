@@ -91,12 +91,16 @@ jobs:
           cd openwrt
           "$GITHUB_WORKSPACE/$DIY_P2_SH"
 
+      - name: Load custom config
+        run: |
+          cd openwrt
+          grep 'CONFIG_TESTING_KERNEL=y' .config
+          grep 'CONFIG_LINUX_' .config || true
+
       - name: Download package
         run: |
           cd openwrt
           make defconfig
-          grep '^CONFIG_TESTING_KERNEL=y' .config
-          grep '^CONFIG_LINUX_' .config || true
           make download -j8
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
