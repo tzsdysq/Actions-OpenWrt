@@ -94,8 +94,10 @@ jobs:
       - name: Load custom config
         run: |
           cd openwrt
-          grep 'CONFIG_TESTING_KERNEL=y' .config
-          grep 'CONFIG_LINUX_' .config || true
+          sed -i 's/^FEATURES:=/FEATURES:=testing-kernel /' target/linux/x86/Makefile
+          sed -i '/^CONFIG_TESTING_KERNEL=/d' .config
+          sed -i '/^# CONFIG_TESTING_KERNEL is not set$/d' .config
+          echo 'CONFIG_TESTING_KERNEL=y' >> .config
 
       - name: Download package
         run: |
